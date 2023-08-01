@@ -184,7 +184,7 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
         if (in_array($event['type'], self::DEPRECATED_EVENT_TYPES)) {
             return new Response(sprintf(
                 'The event type %s is no longer required and can be removed in the webhook settings.',
-                $event['type']
+                (string) $event['type']
             ), Response::HTTP_OK);
         }
 

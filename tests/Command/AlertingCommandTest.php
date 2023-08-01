@@ -79,7 +79,7 @@ class AlertingCommandTest extends TestCase
         $this->mailer
             ->expects($this->once())
             ->method('send');
-        $this->output->setDecorated(true);
+        $this->output->getFormatter()->setDecorated(true);
         $resultCode = $this->command->execute($this->input, $this->output);
         $this->assertEquals(0, $resultCode);
     }

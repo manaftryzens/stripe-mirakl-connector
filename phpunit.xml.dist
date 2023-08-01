@@ -25,7 +25,7 @@
   </php>
   <testsuites>
     <testsuite name="Project Test Suite">
-      <directory>tests/Command</directory>
+      <directory>tests</directory>
     </testsuite>
   </testsuites>
   <listeners>

@@ -2,12 +2,12 @@
 
 namespace App\Command;
 
-use App\Entity\StripeRefund;
 use App\Entity\StripePayout;
+use App\Entity\StripeRefund;
 use App\Entity\StripeTransfer;
 use App\Repository\StripePayoutRepository;
-use App\Repository\StripeTransferRepository;
 use App\Repository\StripeRefundRepository;
+use App\Repository\StripeTransferRepository;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -81,6 +81,7 @@ class AlertingCommand extends Command implements LoggerAwareInterface
         if (0 === count($failedTransfers) && 0 === count($failedPayouts) && 0 === count($failedRefunds)) {
             $this->logger->info('Exiting');
             $this->logger->info('job succeeded');
+
             return 0;
         }
 
@@ -134,6 +135,7 @@ class AlertingCommand extends Command implements LoggerAwareInterface
         $this->mailer->send($email);
         $this->logger->info('<info>Email sent</info>');
         $this->logger->info('job succeeded');
+
         return 0;
     }
 }

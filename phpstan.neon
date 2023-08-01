@@ -1,7 +1,12 @@
 parameters:
+    excludePaths:
+        - 'src/Migrations/Version20201127154506.php'
+        - 'src/Migrations/Version20201207112134.php'
+        - 'src/Kernel.php'
     reportUnmatchedIgnoredErrors: false
     checkGenericClassInNonGenericObjectType: false
     inferPrivatePropertyTypeFromConstructor: true
+    treatPhpDocTypesAsCertain: false 
     ignoreErrors:
         - '#Call to static method createFromThrowable\(\)#'
         - '#typehint#'
@@ -10,3 +15,6 @@ parameters:
         - '#on Psr\\Log\\LoggerInterface\|null#'
     universalObjectCratesClasses:
         - Stripe\StripeObject
+    doctrine:
+        objectManagerLoader: tests/ObjectManager.php
+    

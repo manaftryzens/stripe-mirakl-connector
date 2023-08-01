@@ -44,10 +44,14 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $credentials['token'] === $user->getPassword();
+        if (is_array($credentials) && $credentials['token'] === $user->getPassword()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         return null;
     }

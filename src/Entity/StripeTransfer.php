@@ -240,9 +240,9 @@ class StripeTransfer
         return $this;
     }
 
-    public function getAccountMapping(): ?AccountMapping
+    public function getAccountMapping(): AccountMapping|null
     {
-        return $this->accountMapping;
+        return $this->accountMapping ?? null;
     }
 
     public function setAccountMapping(AccountMapping $accountMapping): self

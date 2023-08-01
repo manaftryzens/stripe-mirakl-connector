@@ -116,7 +116,7 @@ class StripeTransfer
     /**
      * @ORM\Column(type="string", length=1024, nullable=true)
      */
-    private ?string $statusReason;
+    private ?string $statusReason = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)

@@ -32,7 +32,7 @@ class Config
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $value;
+    private ?string $value = null;
 
     public static function getAvailableKeys(): array
     {

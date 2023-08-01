@@ -66,7 +66,7 @@ class StripePayout
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $payoutId;
+    private ?string $payoutId = null;
 
     /**
      * @ORM\Column(type="string")

@@ -43,7 +43,7 @@ class AccountMapping
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $onboardingToken;
+    private ?string $onboardingToken = null;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : false})

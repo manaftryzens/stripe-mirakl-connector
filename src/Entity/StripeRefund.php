@@ -89,12 +89,12 @@ class StripeRefund
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $transactionId;
+    private ?string $transactionId = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $stripeRefundId;
+    private ?string $stripeRefundId = null;
 
     /**
      * @ORM\Column(type="string")

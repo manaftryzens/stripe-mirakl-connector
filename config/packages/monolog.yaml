@@ -27,7 +27,7 @@ when@test:
     monolog:
         handlers:
             main:
-                type: fingers_crossed
+                type: group
                 action_level: error
                 handler: nested
                 excluded_http_codes: [404, 405]
@@ -41,7 +41,7 @@ when@prod:
     monolog:
         handlers:
             main:
-                type: fingers_crossed
+                type: group
                 action_level: error
                 handler: nested
                 excluded_http_codes: [404, 405]

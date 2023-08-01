@@ -172,6 +172,7 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
         try {
             $eventType = 'manaf';
             $event = $this->stripeClient->webhookConstructEvent($payload, $signatureHeader, $webhookSecret);
+            $eventType = 'manaf-'.$event['type'];
             if (is_array($event) && isset($event['type'])) {
                 if (is_array($event['type'])) {
                     $eventType = implode('', $event['type']);

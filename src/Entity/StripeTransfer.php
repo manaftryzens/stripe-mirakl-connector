@@ -126,7 +126,7 @@ class StripeTransfer
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $miraklCreatedDate;
+    private ?\DateTimeInterface $miraklCreatedDate = null;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})

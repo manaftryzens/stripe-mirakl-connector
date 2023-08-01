@@ -170,7 +170,15 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
     protected function handleStripeWebhook(string $payload, string $signatureHeader, string $webhookSecret): Response
     {
         try {
+            $eventType = '';
             $event = $this->stripeClient->webhookConstructEvent($payload, $signatureHeader, $webhookSecret);
+            if (is_array($event) && isset($event['type'])) {
+                if (is_array($event['type'])) {
+                    $eventType = implode('', $event['type']);
+                } else {
+                    $eventType = $event['type'];
+                }
+            }
         } catch (\UnexpectedValueException $e) {
             $this->logger->error('Invalid payload.');
 
@@ -184,7 +192,7 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
         if (in_array($event['type'], self::DEPRECATED_EVENT_TYPES)) {
             return new Response(sprintf(
                 'The event type %s is no longer required and can be removed in the webhook settings.',
-                (string) $event['type']
+                $eventType
             ), Response::HTTP_OK);
         }
 

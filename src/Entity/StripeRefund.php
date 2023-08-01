@@ -109,7 +109,7 @@ class StripeRefund
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $miraklValidationTime;
+    private ?\DateTimeInterface $miraklValidationTime = null;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})

@@ -32,7 +32,7 @@ class AlertingCommandTest extends TestCase
         $this->output
             ->method('getFormatter')
             ->willReturn($this->createMock(OutputFormatterInterface::class));
-
+        $this->output->getFormatter()->setDecorated(true);
         $this->command = new AlertingCommand($this->mailer, $this->transferRepository, $this->payoutRepository, $this->refundRepository, 'mailfrom@example.com', 'mailto@example.com');
         $this->command->setLogger(new NullLogger());
     }
@@ -54,7 +54,7 @@ class AlertingCommandTest extends TestCase
         $this->mailer
             ->expects($this->never())
             ->method('send');
-
+        $this->output->getFormatter()->setDecorated(true);
         $resultCode = $this->command->execute($this->input, $this->output);
         $this->assertEquals(0, $resultCode);
     }

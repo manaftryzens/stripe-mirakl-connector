@@ -2,7 +2,7 @@ monolog:
     channels: ['onboarding', 'pending_debit', 'process_transfer', 'process_refund', 'process_payout', 'monitor_kyc_status', 'failed_operation']
     handlers:
         main:
-            type: group
+            type: fingers_crossed
             action_level: info
             handler: nested
             excluded_http_codes: [404, 405]
@@ -15,7 +15,7 @@ monolog:
             channels: ["!event", "!doctrine", "!messenger"]
 
         critical_mail:
-            type:         group
+            type:         fingers_crossed
             # 500 errors are logged at the critical level
             action_level: critical
             # to also log 400 level errors (but not 404's):

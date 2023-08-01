@@ -170,16 +170,14 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
     protected function handleStripeWebhook(string $payload, string $signatureHeader, string $webhookSecret): Response
     {
         try {
-            $eventType = 'manaf';
+            $eventType = '';
             $event = $this->stripeClient->webhookConstructEvent($payload, $signatureHeader, $webhookSecret);
-            $eventType = 'manaf-'.$event['type'];
             if (isset($event['type'])) {
-                if (is_array($event['type'])) {
-                    $eventType = implode('', $event['type']);
-                } else {
-                    $eventType = (array) $event['type'];
-                    $eventType = implode('', $eventType);
+                $eventType = $event['type'];
+                if (!is_array($eventType)) {
+                    $eventType = (array) $eventType;
                 }
+                $eventType = implode('', $eventType);
             }
         } catch (\UnexpectedValueException $e) {
             $this->logger->error('Invalid payload.');
@@ -300,14 +298,19 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
      */
     private function findMiraklCommercialOrderId(\Stripe\Charge $charge): ?string
     {
-        if (isset($charge['metadata'][$this->metadataCommercialOrderId])) {
-            if ('' === $charge['metadata'][$this->metadataCommercialOrderId]) {
+        if (isset($charge->metadata[$this->metadataCommercialOrderId])) {
+            if ('' === $charge->metadata[$this->metadataCommercialOrderId]) {
                 $message = sprintf('%s is empty in Charge metadata.', $this->metadataCommercialOrderId);
                 $this->logger->error($message);
                 throw new \Exception($message, Response::HTTP_BAD_REQUEST);
             }
+            $metadataCommercialOrderId = $charge->metadata[$this->metadataCommercialOrderId];
 
-            return $charge['metadata'][$this->metadataCommercialOrderId];
+            if (!is_array($metadataCommercialOrderId)) {
+                $metadataCommercialOrderId = (array) $metadataCommercialOrderId;
+            }
+
+            return implode('', $metadataCommercialOrderId);
         }
 
         // Fallback to linked payment intent to see if it contains the metadata
@@ -316,15 +319,19 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
             if (is_string($paymentIntent)) {
                 $paymentIntent = $this->stripeClient->paymentIntentRetrieve($paymentIntent);
             }
-
-            if (isset($paymentIntent['metadata'][$this->metadataCommercialOrderId])) {
-                if ('' === $paymentIntent['metadata'][$this->metadataCommercialOrderId]) {
+            if (isset($paymentIntent->metadata[$this->metadataCommercialOrderId])) {
+                if ('' === $paymentIntent->metadata[$this->metadataCommercialOrderId]) {
                     $message = sprintf('%s is empty in PaymentIntent.', $this->metadataCommercialOrderId);
                     $this->logger->error($message);
                     throw new \Exception($message, Response::HTTP_BAD_REQUEST);
                 }
+                $metadataCommercialOrderId = $paymentIntent->metadata[$this->metadataCommercialOrderId];
 
-                return $paymentIntent['metadata'][$this->metadataCommercialOrderId];
+                if (!is_array($metadataCommercialOrderId)) {
+                    $metadataCommercialOrderId = (array) $metadataCommercialOrderId;
+                }
+
+                return implode('', $metadataCommercialOrderId);
             }
         }
 

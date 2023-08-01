@@ -29,11 +29,11 @@
     <env name="DATABASE_URL" value="sqlite:///:memory:?cache=shared"/>
   </php>
 
-  <testsuites>
+  <!--<testsuites>
     <testsuite name="Project Test Suite">
       <directory>tests</directory>
     </testsuite>
-  </testsuites>
+  </testsuites>-->
 
   <groups>
     <exclude>

@@ -181,10 +181,10 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
             return new Response('Invalid signature.', Response::HTTP_BAD_REQUEST);
         }
 
-        if (in_array($event['type'], self::DEPRECATED_EVENT_TYPES)) {
+        if (isset($event['type']) && in_array($event['type'], self::DEPRECATED_EVENT_TYPES)) {
             return new Response(sprintf(
                 'The event type %s is no longer required and can be removed in the webhook settings.',
-                (bool) $event['type']
+                 $event['type']
             ), Response::HTTP_OK);
         }
 

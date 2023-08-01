@@ -15,14 +15,14 @@ monolog:
             channels: ["!event", "!doctrine", "!messenger"]
 
         critical_mail:
-            type: group
+            type:         group
             # 500 errors are logged at the critical level
             action_level: critical
             # to also log 400 level errors (but not 404's):
             # action_level: error
             # excluded_404s:
             #     - ^/
-            handler: deduplicated
+            handler:      deduplicated
         deduplicated:
             type:    deduplication
             handler: mailer

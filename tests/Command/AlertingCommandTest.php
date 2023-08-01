@@ -29,11 +29,9 @@ class AlertingCommandTest extends TestCase
 
         $this->input = $this->createMock(InputInterface::class);
         $this->output = $this->createMock(OutputInterface::class);
-        $outputFormatter = $this->createMock(OutputFormatterInterface::class);
-        $outputFormatter->setDecorated(true);
         $this->output
             ->method('getFormatter')
-            ->willReturn($outputFormatter);
+            ->willReturn($this->createMock(OutputFormatterInterface::class));
 
         $this->command = new AlertingCommand($this->mailer, $this->transferRepository, $this->payoutRepository, $this->refundRepository, 'mailfrom@example.com', 'mailto@example.com');
         $this->command->setLogger(new NullLogger());

@@ -89,9 +89,9 @@ class StripeTransfer
     private string $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AccountMapping", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AccountMapping")
      */
-    private ?AccountMapping $accountMapping = null;
+    private ?AccountMapping $accountMapping;
 
     /**
      * @ORM\Column(type="string", nullable=true)

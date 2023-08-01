@@ -29,6 +29,7 @@ class AlertingCommandTest extends TestCase
 
         $this->input = $this->createMock(InputInterface::class);
         $this->output = $this->createMock(OutputInterface::class);
+        $this->output->setDecorated(true);
         $this->output
             ->method('getFormatter')
             ->willReturn($this->createMock(OutputFormatterInterface::class));

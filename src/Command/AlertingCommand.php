@@ -88,6 +88,7 @@ class AlertingCommand extends Command implements LoggerAwareInterface
         $displayTransfer = function ($transfer) {
             return [$transfer->getId(), $transfer->getMiraklId(), $transfer->getAmount(), $transfer->getStatus(), $transfer->getType(), $transfer->getStatusReason()];
         };
+        $output->getFormatter()->setDecorated(true);
         $transferTable = new Table($output);
         $transferTable
             ->setHeaderTitle('Failed transfers')

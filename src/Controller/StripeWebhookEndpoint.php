@@ -177,7 +177,8 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
                 if (is_array($event['type'])) {
                     $eventType = implode('', $event['type']);
                 } else {
-                    $eventType = $event['type'];
+                    $eventType = (array) $event['type'];
+                    $eventType = implode('', $eventType);
                 }
             }
         } catch (\UnexpectedValueException $e) {
@@ -299,8 +300,8 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
      */
     private function findMiraklCommercialOrderId(\Stripe\Charge $charge): ?string
     {
-        if (is_array($charge['metadata']) && isset($charge['metadata'][$this->metadataCommercialOrderId])) {
-            if (is_array($charge['metadata']) && '' === $charge['metadata'][$this->metadataCommercialOrderId]) {
+        if (isset($charge['metadata'][$this->metadataCommercialOrderId])) {
+            if ('' === $charge['metadata'][$this->metadataCommercialOrderId]) {
                 $message = sprintf('%s is empty in Charge metadata.', $this->metadataCommercialOrderId);
                 $this->logger->error($message);
                 throw new \Exception($message, Response::HTTP_BAD_REQUEST);
@@ -316,7 +317,7 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
                 $paymentIntent = $this->stripeClient->paymentIntentRetrieve($paymentIntent);
             }
 
-            if (is_array($paymentIntent['metadata']) && isset($paymentIntent['metadata'][$this->metadataCommercialOrderId])) {
+            if (isset($paymentIntent['metadata'][$this->metadataCommercialOrderId])) {
                 if ('' === $paymentIntent['metadata'][$this->metadataCommercialOrderId]) {
                     $message = sprintf('%s is empty in PaymentIntent.', $this->metadataCommercialOrderId);
                     $this->logger->error($message);

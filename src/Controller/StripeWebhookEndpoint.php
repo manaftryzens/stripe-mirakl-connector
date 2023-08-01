@@ -170,7 +170,7 @@ class StripeWebhookEndpoint extends AbstractController implements LoggerAwareInt
     protected function handleStripeWebhook(string $payload, string $signatureHeader, string $webhookSecret): Response
     {
         try {
-            $eventType = '';
+            $eventType = 'manaf';
             $event = $this->stripeClient->webhookConstructEvent($payload, $signatureHeader, $webhookSecret);
             if (is_array($event) && isset($event['type'])) {
                 if (is_array($event['type'])) {

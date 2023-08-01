@@ -45,7 +45,7 @@ class SymfonyMailerHandlerTest extends TestCase
             ->mailer
             ->expects($this->once())
             ->method('send')
-            ->with($this->callback(function ($email) {
+            ->with($this->callback(function (Email $email) {
                 return $email instanceof Email
                     && $this::TEST_FROM_EMAIL === $email->getFrom()[0]->getAddress()
                     && $this::TEST_TO_EMAIL === $email->getTo()[0]->getAddress()

@@ -96,12 +96,12 @@ class StripeTransfer
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $transferId;
+    private ?string $transferId = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $transactionId;
+    private ?string $transactionId = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)

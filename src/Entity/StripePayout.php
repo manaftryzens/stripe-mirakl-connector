@@ -76,7 +76,7 @@ class StripePayout
     /**
      * @ORM\Column(type="string", length=1024, nullable=true)
      */
-    private ?string $statusReason;
+    private ?string $statusReason = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)

@@ -80,7 +80,7 @@ class AlertingCommandTest extends TestCase
             ->expects($this->once())
             ->method('send');
 
-        $resultCode = $this->command->execute((bool) $this->input,(bool) $this->output);
+        $resultCode = $this->command->execute($this->input, $this->output);
         $this->assertEquals(0, $resultCode);
     }
 }

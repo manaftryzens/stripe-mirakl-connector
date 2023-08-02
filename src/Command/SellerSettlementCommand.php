@@ -60,6 +60,11 @@ class SellerSettlementCommand extends Command implements LoggerAwareInterface
         $this->addArgument('mirakl_shop_id', InputArgument::OPTIONAL);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->logger->info('starting');

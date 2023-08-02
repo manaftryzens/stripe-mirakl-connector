@@ -17,6 +17,7 @@ use Hautelook\AliceBundle\PhpUnit\RecreateDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class PaymentRefundCommandTest extends KernelTestCase
 {
@@ -55,11 +56,17 @@ class PaymentRefundCommandTest extends KernelTestCase
          */
         private $transferReceiver;
 
+        /**
+         * @return KernelInterface
+         */
+        protected function runBootKernel(): KernelInterface
+        {
+            return self::bootKernel();
+        }
+        
         protected function setUp(): void
         {
-                // @codeCoverageIgnoreStart
-                $kernel = self::bootKernel();
-                // @codeCoverageIgnoreEnd
+                $kernel = $this->runBootKernel();
                 $application = new Application($kernel);
                 $this->command = $application->find('connector:dispatch:process-refund');
                 $this->commandTester = new CommandTester($this->command);

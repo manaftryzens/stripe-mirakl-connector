@@ -32,6 +32,9 @@ class OverrideDefaultHost implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @return array[]
+     */
     public static function getSubscribedEvents()
     {
         return [

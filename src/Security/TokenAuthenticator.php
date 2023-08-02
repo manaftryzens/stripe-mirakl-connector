@@ -51,6 +51,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         }
     }
 
+    /**
+     * @return null
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         return null;

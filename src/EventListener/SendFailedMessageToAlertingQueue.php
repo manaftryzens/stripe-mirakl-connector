@@ -51,6 +51,9 @@ class SendFailedMessageToAlertingQueue implements EventSubscriberInterface, Logg
         $this->messageBus->dispatch(new NotificationFailedMessage($throwable, $envelope->getMessage()));
     }
 
+    /**
+     * @return array[]
+     */
     public static function getSubscribedEvents()
     {
         return [

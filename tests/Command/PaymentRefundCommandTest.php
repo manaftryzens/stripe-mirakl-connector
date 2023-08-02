@@ -19,6 +19,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ *
+ */
 class PaymentRefundCommandTest extends KernelTestCase
 {
         use RecreateDatabaseTrait;
@@ -57,12 +60,31 @@ class PaymentRefundCommandTest extends KernelTestCase
         private $transferReceiver;
 
         /**
+         * Boots the Kernel for this test.
+         *
+         * @return KernelInterface
+         */
+        protected static function bootKernel(array $options = []): KernelInterface
+        {
+            self::ensureKernelShutdown();
+
+            $kernel = self::createKernel($options);
+            $kernel->boot();
+            self::$kernel = $kernel;
+            self::$booted = true;
+
+            $container = self::$kernel->getContainer();
+            self::$container = $container->has('test.service_container') ? $container->get('test.service_container') : $container;
+
+            return self::$kernel;
+        }
+
+        /**
          * @return void
          */
         protected function setUp(): void
         {
-                $kernel = self::bootKernel();
-                $application = new Application($kernel);
+                $application = new Application(self::bootKernel());
                 $this->command = $application->find('connector:dispatch:process-refund');
                 $this->commandTester = new CommandTester($this->command);
 

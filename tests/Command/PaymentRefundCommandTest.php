@@ -61,7 +61,7 @@ class PaymentRefundCommandTest extends KernelTestCase
          */
         protected function runBootKernel(): KernelInterface
         {
-            return self::bootKernel();
+            return parent::bootKernel();
         }
 
         /**

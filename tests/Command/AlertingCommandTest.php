@@ -37,6 +37,7 @@ class AlertingCommandTest extends TestCase
         $this->output
             ->method('getFormatter')
             ->willReturn($outputFormatter);
+        $this->output->setFormatter($outputFormatter);
         $this->command = new AlertingCommand($this->mailer, $this->transferRepository, $this->payoutRepository, $this->refundRepository, 'mailfrom@example.com', 'mailto@example.com');
         $this->command->setLogger(new NullLogger());
     }

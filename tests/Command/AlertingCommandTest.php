@@ -39,6 +39,9 @@ class AlertingCommandTest extends TestCase
         $this->command->setLogger(new NullLogger());
     }
 
+    /**
+     * @return void
+     */
     public function testExecuteWithNoFailedOperation()
     {
         $this->transferRepository
@@ -60,6 +63,9 @@ class AlertingCommandTest extends TestCase
         $this->assertEquals(0, $resultCode);
     }
 
+    /**
+     * @return void
+     */
     public function testExecuteWithFailedOperations()
     {
         $failedTransfers = $this->createMock(StripeTransfer::class);

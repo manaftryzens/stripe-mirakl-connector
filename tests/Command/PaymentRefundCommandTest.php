@@ -55,6 +55,9 @@ class PaymentRefundCommandTest extends KernelTestCase
          */
         private $transferReceiver;
 
+        /**
+         * @return void
+         */
         protected function setUp(): void
         {
                 $kernel = self::bootKernel();

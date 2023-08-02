@@ -65,9 +65,7 @@ class PaymentRefundCommandTest extends KernelTestCase
             return self::bootKernel();
         }
 
-        /**
-         * @return void
-         */
+
         protected function setUp(): void
         {
                 $application = new Application(self::runBootKernel());

@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        php-versions: [8.1.21]
+        php-versions: [8.1.12]
 
     runs-on: ubuntu-latest
 

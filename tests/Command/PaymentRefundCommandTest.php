@@ -64,19 +64,9 @@ class PaymentRefundCommandTest extends KernelTestCase
          *
          * @return KernelInterface
          */
-        protected static function bootKernel(array $options = []): KernelInterface
+        protected static function runBootKernel(): KernelInterface
         {
-            self::ensureKernelShutdown();
-
-            $kernel = self::createKernel($options);
-            $kernel->boot();
-            self::$kernel = $kernel;
-            self::$booted = true;
-
-            $container = self::$kernel->getContainer();
-            self::$container = $container->has('test.service_container') ? $container->get('test.service_container') : $container;
-
-            return self::$kernel;
+            return self::bootKernel();
         }
 
         /**
@@ -84,7 +74,7 @@ class PaymentRefundCommandTest extends KernelTestCase
          */
         protected function setUp(): void
         {
-                $application = new Application(self::bootKernel());
+                $application = new Application(self::runBootKernel());
                 $this->command = $application->find('connector:dispatch:process-refund');
                 $this->commandTester = new CommandTester($this->command);
 

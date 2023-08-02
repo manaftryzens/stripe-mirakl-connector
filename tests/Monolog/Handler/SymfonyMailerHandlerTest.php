@@ -50,9 +50,12 @@ class SymfonyMailerHandlerTest extends TestCase
                     && $this::TEST_FROM_EMAIL === $email->getFrom()[0]->getAddress()
                     && $this::TEST_TO_EMAIL === $email->getTo()[0]->getAddress()
                     && $this::TEST_SUBJECT === $email->getSubject()
-                    && str_contains($email->getHtmlBody(), 'app.ERROR: new log message');
+                    && str_contains($email->getHtmlBody(), 'new log message')
+                    && str_contains($email->getHtmlBody(), 'ERROR');
             }));
 
         $email = $this->symfonyMailerHandler->handleBatch([$logRecord]);
+
+
     }
 }

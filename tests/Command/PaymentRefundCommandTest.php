@@ -57,19 +57,11 @@ class PaymentRefundCommandTest extends KernelTestCase
         private $transferReceiver;
 
         /**
-         * {@inheritdoc}
-         */
-        protected function runBootKernel()
-        {
-            return self::bootKernel();
-        }
-
-        /**
          * @return void
          */
         protected function setUp(): void
         {
-                $kernel = $this->runBootKernel();
+                $kernel = self::bootKernel();
                 $application = new Application($kernel);
                 $this->command = $application->find('connector:dispatch:process-refund');
                 $this->commandTester = new CommandTester($this->command);

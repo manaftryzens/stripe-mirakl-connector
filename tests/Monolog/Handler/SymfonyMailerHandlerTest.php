@@ -51,6 +51,8 @@ class SymfonyMailerHandlerTest extends TestCase
                     && $this::TEST_TO_EMAIL === $email->getTo()[0]->getAddress()
                     && $this::TEST_SUBJECT === $email->getSubject()
                     && str_contains($email->getHtmlBody(), 'new log message')
+                    && str_contains($email->getHtmlBody(), 'Channel:')
+                    && str_contains($email->getHtmlBody(), 'app')
                     && str_contains($email->getHtmlBody(), 'ERROR');
             }));
 

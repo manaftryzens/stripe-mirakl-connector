@@ -11,7 +11,6 @@ use App\Repository\StripeTransferRepository;
 use App\Repository\StripeRefundRepository;
 use Psr\Log\NullLogger;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -36,7 +35,6 @@ class AlertingCommandTest extends TestCase
         $this->output
             ->method('getFormatter')
             ->willReturn($outputFormatter);
-        $this->output->setFormatter($outputFormatter);
         $this->command = new AlertingCommand($this->mailer, $this->transferRepository, $this->payoutRepository, $this->refundRepository, 'mailfrom@example.com', 'mailto@example.com');
         $this->command->setLogger(new NullLogger());
     }

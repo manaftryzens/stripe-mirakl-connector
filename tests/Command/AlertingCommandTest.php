@@ -31,10 +31,12 @@ class AlertingCommandTest extends TestCase
 
         $this->input = $this->createMock(InputInterface::class);
         $this->output = $this->createMock(OutputInterface::class);
+        $outputFormatter = $this->createMock(OutputFormatterInterface::class);
+        $outputFormatter->setDecorated(false);
+        $this->output->setFormatter($outputFormatter);
         $this->output
             ->method('getFormatter')
-            ->willReturn($this->createMock(OutputFormatterInterface::class));
-        $this->output->setFormatter(new OutputFormatter(true));
+            ->willReturn($outputFormatter);
         $this->command = new AlertingCommand($this->mailer, $this->transferRepository, $this->payoutRepository, $this->refundRepository, 'mailfrom@example.com', 'mailto@example.com');
         $this->command->setLogger(new NullLogger());
     }

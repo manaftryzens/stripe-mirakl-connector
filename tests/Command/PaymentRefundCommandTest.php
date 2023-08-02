@@ -63,7 +63,10 @@ class PaymentRefundCommandTest extends KernelTestCase
         {
             return self::bootKernel();
         }
-        
+
+        /**
+         * @return void
+         */
         protected function setUp(): void
         {
                 $kernel = $this->runBootKernel();

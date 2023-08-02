@@ -59,12 +59,8 @@ class PaymentRefundCommandTest extends KernelTestCase
          */
         private $transferReceiver;
 
-        /**
-         * Boots the Kernel for this test.
-         *
-         * @return KernelInterface
-         */
-        protected static function runBootKernel(): KernelInterface
+
+        protected static function runBootKernel()
         {
             return self::bootKernel();
         }

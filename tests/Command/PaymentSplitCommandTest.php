@@ -31,7 +31,9 @@ class PaymentSplitCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        $application = new Application(self::bootKernel());
+        /** @var \Symfony\Component\HttpKernel\KernelInterface $currentCategory **/
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
         $this->command = $application->find('connector:dispatch:process-transfer');
         $this->commandTester = new CommandTester($this->command);
 

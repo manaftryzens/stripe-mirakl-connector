@@ -55,12 +55,11 @@ class PaymentRefundCommandTest extends KernelTestCase
          */
         private $transferReceiver;
 
-        /**
-         * @return void
-         */
         protected function setUp(): void
         {
+                // @codeCoverageIgnoreStart
                 $kernel = self::bootKernel();
+                // @codeCoverageIgnoreEnd
                 $application = new Application($kernel);
                 $this->command = $application->find('connector:dispatch:process-refund');
                 $this->commandTester = new CommandTester($this->command);
